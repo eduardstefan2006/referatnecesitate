@@ -4,19 +4,20 @@
 
 # REFERAT DE NECESITATE
 
-           **AVIZAT**                            **APROBAT**  
-            Contabil,                             Director,  
-...............................     ..............................
-                     
+**AVIZAT**                             | **APROBAT**  
+---------------------------------------|---------------------------------------  
+Contabil,                              | Director,  
+...............................        | ..............................
+
 ## 1. Date generale
 
 **Subsemnatul**: ........................................................................  
-**Angajat al**: ...............................................
-**Funcția**: ..........................................................  
+**Angajat al**: ...............................................  
+**Funcția**: ..........................................................
 
 ## 2. Solicitare achiziționare produse/servicii
 
-Prin prezentul referat solicit să întreprindeţi cele legale pentru achiziţionarea produselor descrise în tabelul de mai jos, acestea fiindu-ne necesare pentru ................................................................................................................:
+Prin prezentul referat solicit să întreprindeţi cele legale pentru achiziţionarea produselor descrise în tabelul de mai jos, acestea fiindu-ne necesare pentru ....................................[...]
 
 | Nr. Crt. | Denumire produse / servicii / lucrări | U/M | Cantitate | Preţ unitar (lei fara TVA)* | Valoare* | Destinaţia |
 |----------|---------------------------------------|-----|-----------|-----------------------------|---------|------------|
