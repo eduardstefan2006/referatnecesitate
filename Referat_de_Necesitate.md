@@ -4,9 +4,9 @@
 
 # REFERAT DE NECESITATE
 
-                 **AVIZAT**                            **APROBAT**  
-                  Contabil,                             Director,  
-...................................     ..................................
+           **AVIZAT**                            **APROBAT**  
+            Contabil,                             Director,  
+...............................     ..............................
                      
 ## 1. Date generale
 
