@@ -23,7 +23,7 @@ Prin prezentul referat solicit să întreprindeţi cele legale pentru achiziţio
 | 1.       |                                       |     |           |                             |         |            |
 | 2.       |                                       |     |           |                             |         |            |
 | 3.       |                                       |     |           |                             |         |            |
-| 4.       |                                       |                                       |           |                             |         |            |
+| 4.       |                                       |     |           |                             |         |            |
 | 5.       |                                       |     |           |                             |         |            |
 | 6.       |                                       |     |           |                             |         |            |
 | 7.       |                                       |     |           |                             |         |            |
