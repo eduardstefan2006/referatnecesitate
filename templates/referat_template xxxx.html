@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referat de Necesitate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .header-table, .approval-table, .info-table, .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .header-table th, .header-table td,
+        .approval-table th, .approval-table td,
+        .info-table th, .info-table td,
+        .product-table th, .product-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .header-table th, .header-table td {
+            border: none;
+            padding: 5px;
+        }
+
+        .header-table .left {
+            text-align: left;
+        }
+
+        .header-table .right {
+            text-align: right;
+        }
+
+        .title {
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+        }
+
+        .approval-table td {
+            width: 50%;
+        }
+
+        .approval-table .left {
+            text-align: left;
+        }
+
+        .approval-table .right {
+            text-align: right;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 40px;
+            color: #007BFF;
+        }
+
+        .product-table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .product-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .product-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .product-table th, .product-table td {
+            text-align: center;
+        }
+
+        .product-table {
+            table-layout: fixed; /* Fixes the layout issue */
+        }
+
+        .product-table th.nr-crt {
+            width: 5%;
+        }
+
+        .product-table th.um {
+            width: 7%;
+        }
+
+        .product-table th.cantitate {
+            width: 10%;
+        }
+
+        .product-table th.pret-unitar {
+            width: 10%;
+        }
+
+        .product-table th.valoare {
+            width: 12%;
+        }
+
+        input[type="number"] {
+            text-align: right;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <table class="header-table">
+        <tr>
+            <td class="left">
+                <strong>Nr.înreg.:</strong> {{ data['nr_inregistrare'][0] }}<br>
+                <strong>Dată:</strong> {{ data['data'][0] }}<br>
+                <strong>Instituția:</strong> {{ data['institutia'][0] }}
+            </td>
+            <td class="right">
+            </td>
+        </tr>
+    </table>
+
+    <h1 class="title">Referat de Necesitate</h1>
+
+    <table class="approval-table">
+        <tr>
+            <td class="left">
+                <strong>AVIZAT</strong><br>
+                Contabil,<br>
+                ...............................
+            </td>
+            <td class="right">
+                <strong>APROBAT</strong><br>
+                Director,<br>
+                ...............................
+            </td>
+        </tr>
+    </table>
+
+    <table class="info-table">
+        <tr>
+            <th>Subsemnatul:</th>
+            <td>{{ data['subsemnatul'][0] }}</td>
+        </tr>
+        <tr>
+            <th>Angajat al:</th>
+            <td>{{ data['angajat_al'][0] }}</td>
+        </tr>
+        <tr>
+            <th>Funcția:</th>
+            <td>{{ data['functia'][0] }}</td>
+        </tr>
+        <tr>
+            <th>Motivarea solicitării:</th>
+            <td>{{ data['motivare'][0] }}</td>
+        </tr>
+    </table>
+
+    <h2 class="title">Solicitare achiziționare produse/servicii</h2>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th class="nr-crt">Nr. Crt.</th>
+                <th>Denumire produse / servicii / lucrări</th>
+                <th class="um">U/M</th>
+                <th class="cantitate">Cantitate</th>
+                <th class="pret-unitar">Preţ unitar (lei fara TVA)</th>
+                <th class="valoare">Valoare</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(data['product_0']|length) %}
+            <tr>
+                <td>{{ data['product_0'][i] }}</td>
+                <td>{{ data['product_1'][i] }}</td>
+                <td>{{ data['product_2'][i] }}</td>
+                <td>{{ data['product_3'][i] }}</td>
+                <td>{{ data['product_4'][i] }}</td>
+                <td>{{ data['product_5'][i] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="signature">
+        <h2>Semnătură solicitant</h2>
+        <p>..........................................</p>
+    </div>
+</body>
+</html>

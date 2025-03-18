@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referat de Necesitate Online</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function addRow() {
+            const table = document.getElementById('productsTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            for (let i = 0; i < 6; i++) {
+                const newCell = newRow.insertCell(i);
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `product_${i}[]`;
+                if (i === 0) {
+                    input.type = 'number';
+                    input.readOnly = true;
+                } else if (i === 3 || i === 4 || i === 5) {
+                    input.type = 'number';
+                    input.step = '0.01';
+                    input.addEventListener('input', checkForComma);
+                } else {
+                    input.type = 'text';
+                }
+                newCell.appendChild(input);
+            }
+            updateNrCrt();
+        }
+
+        function checkForComma(event) {
+            const input = event.target;
+            if (input.value.includes(',')) {
+                input.setCustomValidity('Folosiți punctul în loc de virgulă pentru zecimale.');
+                input.reportValidity();
+                input.value = input.value.replace(',', '.');
+                playAlertSound();
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+
+        function playAlertSound() {
+            const audio = new Audio('https://www.myinstants.com/media/sounds/bloop.mp3'); // Link către un sunet de alertă
+            audio.play();
+        }
+
+        function updateNrCrt() {
+            const table = document.getElementById('productsTable').getElementsByTagName('tbody')[0];
+            for (let i = 0; i < table.rows.length; i++) {
+                const nrCrtInput = table.rows[i].cells[0].querySelector('input');
+                nrCrtInput.value = i + 1;
+                console.log(`Row ${i + 1} Nr. Crt. value: ${nrCrtInput.value}`);  // Log the value
+            }
+        }
+
+        function calculateValoare(row) {
+            const cantitate = parseFloat(row.cells[3].querySelector('input').value) || 0;
+            const pretUnit = parseFloat(row.cells[4].querySelector('input').value) || 0;
+            const valoare = (cantitate * pretUnit).toFixed(2);
+            row.cells[5].querySelector('input').value = valoare;
+        }
+
+        function copyInstitutieValue() {
+            const institutie = document.getElementById('institutia').value;
+            document.getElementById('angajat_al').value = institutie;
+        }
+
+        document.addEventListener('input', function(event) {
+            if (event.target.matches('input[name="product_3[]"], input[name="product_4[]"]')) {
+                calculateValoare(event.target.closest('tr'));
+            }
+            if (event.target.id === 'institutia') {
+                copyInstitutieValue();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => input.addEventListener('input', checkForComma));
+            updateNrCrt();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Referat de Necesitate - Online</h1>
+        <form method="POST">
+            <div class="form-group-inline">
+                <div class="form-group nr-inregistrare">
+                    <label for="nr_inregistrare">Nr.înreg.:</label>
+                    <input type="text" id="nr_inregistrare" name="nr_inregistrare[]" maxlength="5" required>
+                </div>
+                <div class="form-group data">
+                    <label for="data">Dată:</label>
+                    <input type="date" id="data" name="data[]" required>
+                </div>
+                <div class="form-group institutie">
+                    <label for="institutia">Instituția:</label>
+                    <select id="institutia" name="institutia[]" class="institutie-dropdown" onchange="copyInstitutieValue()" required>
+                        {% for institutie in institutii %}
+                            <option value="{{ institutie }}">{{ institutie }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group-inline">
+                <div class="form-group subsemnatul">
+                    <label for="subsemnatul">Subsemnatul:</label>
+                    <input type="text" id="subsemnatul" name="subsemnatul[]" required>
+                </div>
+                <div class="form-group angajat-al">
+                    <label for="angajat_al">Angajat al:</label>
+                    <input type="text" id="angajat_al" name="angajat_al[]" required readonly>
+                </div>
+                <div class="form-group functia">
+                    <label for="functia">Funcția:</label>
+                    <select id="functia" name="functia[]" class="functie-dropdown" required>
+                        <option value="PROFESOR">PROFESOR</option>
+                        <option value="SECRETAR">SECRETAR</option>
+                        <option value="ADMINISTRATOR FINANCIAR">ADMINISTRATOR FINANCIAR</option>
+                        <option value="INFORMATICIAN">INFORMATICIAN</option>
+                        <option value="ÎNGRIJITOR">ÎNGRIJITOR</option>
+                        <option value="PAZNIC">PAZNIC</option>
+                        <option value="MUNCITOR">MUNCITOR</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="motivare">Motivarea solicitării:</label>
+                <textarea id="motivare" name="motivare[]" required></textarea>
+            </div>
+
+            <h2>Produse / Servicii</h2>
+            <table id="productsTable">
+                <thead>
+                    <tr>
+                        <th class="nr-crt">Nr. Crt.</th>
+                        <th>Denumire produse / servicii / lucrări</th>
+                        <th class="um">U/M</th>
+                        <th class="cantitate">Cantitate</th>
+                        <th class="pret-unitar">Preţ unitar (lei fara TVA)</th>
+                        <th class="valoare">Valoare</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="number" name="product_0[]" readonly></td>
+                        <td><input type="text" name="product_1[]"></td>
+                        <td><input type="text" class="um" name="product_2[]"></td>
+                        <td><input type="number" class="cantitate" name="product_3[]" step="0.01"></td>
+                        <td><input type="number" class="pret-unitar" name="product_4[]" step="0.01"></td>
+                        <td><input type="number" class="valoare" name="product_5[]" readonly step="0.01"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" onclick="addRow()">Add Row</button><br>
+            <button type="submit">Generate PDF</button>
+        </form>
+    </div>
+</body>
+</html>
