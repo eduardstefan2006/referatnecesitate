@@ -48,35 +48,37 @@ def index():
 
         logging.debug(f"Processed data: {data}")
 
+        # Adaugă footerul la date
+        footer_html = render_template('footer.html', data=data)
+        footer_file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'footer.html')
+        with open(footer_file_path, 'w', encoding='utf-8') as f:
+            f.write(footer_html)
+        logging.debug(f"Footer HTML: {footer_html}")
+
+        # Adaugă headerul la date
+        header_html = render_template('header.html', data=data)
+        header_file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'header.html')
+        with open(header_file_path, 'w', encoding='utf-8') as f:
+            f.write(header_html)
+        logging.debug(f"Header HTML: {header_html}")
+
         rendered = render_template('referat_template.html', data=data)
         logging.debug(f"Rendered HTML: {rendered}")
 
         pdf_file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'Referat_de_Necesitate.pdf')
         options = {
             'enable-local-file-access': None,
-            'no-stop-slow-scripts': None
+            'no-stop-slow-scripts': None,
+            'footer-html': footer_file_path,  # Adaugă footerul din fișierul HTML
+            'header-html': header_file_path,  # Adaugă headerul din fișierul HTML
+            'encoding': 'UTF-8'  # Asigură-te că encoding-ul este corect pentru diacritice
         }
         pdfkit.from_string(rendered, pdf_file_path, configuration=config, options=options)
         logging.debug(f"PDF generated at: {pdf_file_path}")
 
         return send_file(pdf_file_path, as_attachment=True)
     
-    data = {
-        'nr_inregistrare': ['001'],
-        'data': ['2025-02-13'],
-        'institutia': [''],
-        'subsemnatul': [''],
-        'angajat_al': [''],
-        'functia': [''],
-        'motivare': [''],
-        'product_0': [1, 2, 3],
-        'product_1': ['Produs 1', 'Produs 2', 'Produs 3'],
-        'product_2': ['Buc', 'Buc', 'Buc'],
-        'product_3': [10.00, 20.00, 30.00],
-        'product_4': [15.00, 25.00, 35.00],
-        'product_5': [150.00, 500.00, 1050.00]
-    }
-    return render_template('index.html', data=data, institutii=institutii)
+    return render_template('index.html', institutii=institutii)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)

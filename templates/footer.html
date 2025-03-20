@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            text-align: center;
+            color: #007BFF;
+            padding-bottom: 60px; /* Adaugă padding jos pentru a ridica footerul */
+        }
+        .footer {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            font-size: 12px; /* Mărește dimensiunea fontului */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="footer">
+        {% if data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ NR.1 LIEȘTI' %}
+            Comuna Liești, Str. Anghel Saligny, Nr.63, Județul Galați, Tel: 0236835940; Fax:0336733350,
+            E-mail scoala_unu_liesti@yahoo.com, https://www.scoala1liesti.ro/
+        {% elif data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ NR.2 LIEȘTI' %}
+            Comuna Liești, Str. Gării, Nr.2, Județul Galați, CP807180, Tel:0236821120, Fax. 0336888956,
+            E-mail: sam_2_liesti@yahoo.com, https://www.scoala2liesti.ro/
+        {% elif data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ „SFÂNTUL NICOLAE” LIEȘTI' %}
+            Comuna Liești, Str. Anghel Saligny Nr. 330, Județul Galați, CIF:29078547, Cod: 807180; Telefon/Fax: 0236/835942,
+            E-mail: scoalanr4liesti@yahoo.com; https://www.scoalasfnicolaeliesti.ro/
+        {% endif %}
+    </div>
+</body>
+</html>
