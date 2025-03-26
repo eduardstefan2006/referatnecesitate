@@ -132,13 +132,29 @@
         <tr>
             <td class="left">
                 <strong>AVIZAT</strong><br>
-                Contabil,<br>
-                ...............................
+                {% if data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ NR.1 LIEȘTI' %}
+                    Contabil, Stăncescu Vetuța
+                {% elif data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ NR.2 LIEȘTI' %}
+                    Contabil, Grigoraș Mirela
+                {% elif data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ „SFÂNTUL NICOLAE” LIEȘTI' %}
+                    Contabil, Dolea Maria
+                {% else %}
+                    Contabil,
+                {% endif %}
+                <br>...............................
             </td>
             <td class="right">
                 <strong>APROBAT</strong><br>
-                Director,<br>
-                ...............................
+                {% if data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ NR.1 LIEȘTI' %}
+                    Director, Prof. Valentina Lupoaie
+                {% elif data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ NR.2 LIEȘTI' %}
+                    Director, Prof. Grigoraș Mirela
+                {% elif data['institutia'][0] == 'ȘCOALA GIMNAZIALĂ „SFÂNTUL NICOLAE” LIEȘTI' %}
+                    Director, Prof. Purice-Susanu Nicoleta
+                {% else %}
+                    Director,
+                {% endif %}
+                <br>...............................
             </td>
         </tr>
     </table>
