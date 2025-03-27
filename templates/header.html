@@ -6,13 +6,47 @@
         body {
             font-family: Arial, sans-serif;
             font-size: 12px;
+            margin: 0;
+            padding: 0;
+        }
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            height: 100px;
+        }
+        .header-text {
+            font-size: 24px;
+            margin: 0;
+            display: flex;
+            width: 100%;
             text-align: center;
+            color: white; /* Setează culoarea fontului la alb */
+        }
+        .header-text span {
+            flex: 1;
+            padding: 10px 0;
+        }
+        .red-bg {
+            background-color: red;
+        }
+        .yellow-bg {
+            background-color: yellow;
+        }
+        .blue-bg {
+            background-color: blue;
         }
     </style>
 </head>
 <body>
     <div class="header-content">
-        <!-- Poți adăuga conținut pentru header aici -->
+        <div class="header-text">
+            <span class="red-bg">MINISTERUL</span>
+            <span class="yellow-bg">EDUCAȚIEI</span>
+            <span class="blue-bg">ȘI CERCETĂRII</span>
+        </div>
     </div>
 </body>
 </html>
